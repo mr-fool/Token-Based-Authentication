@@ -9,7 +9,7 @@ export default new Vuex.Store({
     user: null
   },
   mutations: {
-    SET_USER_DATA(state, userData) {
+    SET_USER_DATA (state, userData) {
       state.user = userData
       localStorage.setItem('user', JSON.stringify(userData))
       axios.defaults.headers.common['Authorization'] = `Bearer ${
@@ -18,12 +18,24 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    register({ commit }, credentials) {
+    register ({ commit }, credentials) {
       return axios
         .post('//localhost:3000/register', credentials)
         .then(({ data }) => {
           commit('SET_USER_DATA', data)
         })
+    },
+    login ({ commit }, credentials) {
+      return axios
+        .post('//localhost:3000/login', credentials)
+        .then(({ data }) => {
+          commit('SET_USER_DATA', data)
+        })
+    }
+  },
+  getters: {
+    loggedIn (state) {
+      return !!state.user
     }
   }
 })
