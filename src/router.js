@@ -10,8 +10,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: '/',
       name: 'home',
       component: Home
@@ -20,7 +19,9 @@ const router = new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard,
-      meta: {requireAuth: true}
+      meta: {
+        requireAuth: true
+      }
     },
     {
       path: '/register',
